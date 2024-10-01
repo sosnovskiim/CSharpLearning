@@ -15,11 +15,15 @@ namespace CSharpLearning
 
         private static void PrintDivisors(int n, int m = 1)
         {
-            if (n >= m)
+            if (n >= m * m)
             {
                 if (n % m == 0)
                 {
                     Console.Write(m + " ");
+                    if (m * m != n)
+                    {
+                        Console.Write(n / m + " ");
+                    }
                 }
                 PrintDivisors(n, m + 1);
             }
