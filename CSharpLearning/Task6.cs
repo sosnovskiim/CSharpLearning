@@ -2,6 +2,12 @@
 
 namespace CSharpLearning
 {
+    /*
+     * Дан массив размером n x n, элементы которого целые числа.
+     * Найти минимальный элемент в каждом столбце и записать данные в новый массив.
+     * Примечание - для хранения массива размером n x n
+     * использовать двумерный или ступенчатый массив и обосновать свой выбор.
+     */
     internal class Task6
     {
         internal static void Execute()
@@ -9,13 +15,13 @@ namespace CSharpLearning
             Random random = new Random();
             int n = random.Next(4, 7);
             int[,] a = new int[n, n];
-            Console.WriteLine($"Сгенерирована матрица {n}x{n}:");
+            Console.WriteLine($"Сгенерирован двумерный массив {n}x{n}:");
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
                     a[i, j] = random.Next(10, 100);
-                    Console.Write(a[i, j] + " ");
+                    Console.Write("{0} ", a[i, j]);
                 }
                 Console.WriteLine();
             }

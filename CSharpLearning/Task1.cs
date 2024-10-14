@@ -2,6 +2,10 @@
 
 namespace CSharpLearning
 {
+    /*
+     * Написать программу, определяющую чётность заданного целого числа.
+     * Примечание - необходимо использовать тернарную операцию.
+     */
     internal class Task1
     {
         internal static void Execute()

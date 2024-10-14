@@ -2,6 +2,10 @@
 
 namespace CSharpLearning
 {
+    /*
+     * Разработать рекурсивный метод, не возвращающий значений
+     * для вывода на экран всех делителей заданного натурального числа n.
+     */
     internal class Task5
     {
         internal static void Execute()
