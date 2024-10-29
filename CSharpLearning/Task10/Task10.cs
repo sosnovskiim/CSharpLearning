@@ -3,6 +3,9 @@ using System.Diagnostics;
 
 namespace CSharpLearning
 {
+    /*
+     * Сравнить итерационный алгоритм и стандартный метод возведения в степень.
+     */
     internal class Task10
     {
         internal static void Execute()
