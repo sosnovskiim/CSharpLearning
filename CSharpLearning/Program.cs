@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace CSharpLearning
+﻿namespace CSharpLearning
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Task11.Execute();
+            Task12.Execute();
         }
     }
 }

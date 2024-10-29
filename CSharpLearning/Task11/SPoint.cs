@@ -18,7 +18,7 @@ namespace CSharpLearning
             return Math.Sqrt(x * x + y * y + z * z);
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return $"({x}, {y}, {z})";
         }

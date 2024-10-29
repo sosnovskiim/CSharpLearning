@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning.Task12
+namespace CSharpLearning
 {
     struct Student : IComparable<Student>
     {
@@ -26,6 +26,11 @@ namespace CSharpLearning.Task12
         public int CompareTo(Student other)
         {
             return this.group.CompareTo(other.group);
+        }
+
+        public override string ToString()
+        {
+            return $"{surname} {name} {patronymic} {group} {exam1} {exam2} {exam3}";
         }
     }
 }
