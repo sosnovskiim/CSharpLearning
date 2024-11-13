@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task3
 {
     /*
      * Разработать метод, возвращающий наибольший общий делитель для заданных натуральных чисел n и m.

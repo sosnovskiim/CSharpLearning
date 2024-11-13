@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task2
 {
     /*
      * Вывести на экран квадраты всех чётных чисел из диапозона от a до b (a <= b).

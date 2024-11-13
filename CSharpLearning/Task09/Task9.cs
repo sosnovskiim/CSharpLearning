@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task9
 {
     /*
      * Дан файл f, компонентами которого являются целые числа.
@@ -10,11 +10,11 @@ namespace CSharpLearning
     {
         internal static void Execute()
         {
-            using (StreamReader f = new StreamReader("../../../Task9/f.txt"))
+            using (StreamReader f = new StreamReader("../../../Task09/f.txt"))
             {
-                using (StreamWriter g = new StreamWriter("../../../Task9/g.txt"))
+                using (StreamWriter g = new StreamWriter("../../../Task09/g.txt"))
                 {
-                    using (StreamWriter h = new StreamWriter("../../../Task9/h.txt"))
+                    using (StreamWriter h = new StreamWriter("../../../Task09/h.txt"))
                     {
                         char[] separators = { ' ', '\r', '\t', '\n' };
                         string[] s = f.ReadToEnd().Split(separators, System.StringSplitOptions.RemoveEmptyEntries);

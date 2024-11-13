@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task7
 {
     /*
      * Дан ступенчатый массив размером n x m, элементы которого целые числа.

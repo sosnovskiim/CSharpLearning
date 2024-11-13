@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task5
 {
     /*
      * Разработать рекурсивный метод, не возвращающий значений

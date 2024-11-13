@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task1
 {
     /*
      * Написать программу, определяющую чётность заданного целого числа.

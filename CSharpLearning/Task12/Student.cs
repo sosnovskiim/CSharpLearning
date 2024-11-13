@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task12
 {
-    struct Student : IComparable<Student>
+    internal struct Student : IComparable<Student>
     {
-        private string surname;
+        public readonly string surname;
         private string name;
         private string patronymic;
         private string group;

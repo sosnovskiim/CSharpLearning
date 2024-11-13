@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task10
 {
     /*
      * Сравнить итерационный алгоритм и стандартный метод возведения в степень.

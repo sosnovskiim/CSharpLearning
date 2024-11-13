@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task11
 {
     /*
      * Решить задачу, используя структуру SPoint для хранения координат точки.

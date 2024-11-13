@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task6
 {
     /*
      * Дан массив размером n x n, элементы которого целые числа.

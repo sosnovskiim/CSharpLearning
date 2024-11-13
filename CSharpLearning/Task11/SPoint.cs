@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task11
 {
-    struct SPoint
+    internal struct SPoint
     {
         private int x, y, z;
 

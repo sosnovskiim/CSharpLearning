@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task4
 {
     /*
      * Разработать рекурсивный метод, возвращающий значение для суммы от 1 до n.

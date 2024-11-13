@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLearning
+namespace CSharpLearning.Task8
 {
     /*
      * Дана строка, в которой содержится осмысленное текстовое сообщение.
