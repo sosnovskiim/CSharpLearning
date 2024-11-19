@@ -7,12 +7,12 @@ namespace CSharpLearning.Task12
         public readonly string surname;
         private string name;
         private string patronymic;
-        private string group;
+        private int group;
         private string exam1;
         private string exam2;
         private string exam3;
 
-        public Student(string surname, string name, string patronymic, string group, string exam1, string exam2, string exam3)
+        public Student(string surname, string name, string patronymic, int group, string exam1, string exam2, string exam3)
         {
             this.surname = surname;
             this.name = name;
@@ -25,7 +25,9 @@ namespace CSharpLearning.Task12
 
         public int CompareTo(Student other)
         {
-            return this.group.CompareTo(other.group);
+            if (this.group > other.group) return 1;
+            if (this.group == other.group) return 0;
+            return -1;
         }
 
         public override string ToString()

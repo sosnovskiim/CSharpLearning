@@ -26,7 +26,7 @@ namespace CSharpLearning.Task12
                         string[] data = line.Split();
                         if (data[4] != Unsatisfactory && data[5] != Unsatisfactory && data[6] != Unsatisfactory)
                         {
-                            passedStudents.Add(new Student(data[0], data[1], data[2], data[3], data[4], data[5], data[6]));
+                            passedStudents.Add(new Student(data[0], data[1], data[2], int.Parse(data[3]), data[4], data[5], data[6]));
                         }
                     }
                     passedStudents.Sort();
