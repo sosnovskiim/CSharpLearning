@@ -23,7 +23,9 @@ namespace CSharpLearning.Task14
 
         public int CompareTo(Student other)
         {
-            return GraduatedSchool.CompareTo(other.GraduatedSchool);
+            if (this.GraduatedSchool > other.GraduatedSchool) return 1;
+            if (this.GraduatedSchool == other.GraduatedSchool) return 0;
+            return -1;
         }
 
         public override string ToString()

@@ -21,8 +21,8 @@ namespace CSharpLearning.Task15
 
         public Point(Point p)
         {
-            x = p.X;
-            y = p.Y;
+            x = p.x;
+            y = p.y;
         }
 
         public double DistanceToOrigin()
@@ -64,32 +64,32 @@ namespace CSharpLearning.Task15
 
         public static Point operator ++(Point p)
         {
-            p.X++;
-            p.Y++;
+            p.x++;
+            p.y++;
             return p;
         }
 
         public static Point operator --(Point p)
         {
-            p.X--;
-            p.Y--;
+            p.x--;
+            p.y--;
             return p;
         }
 
         public static bool operator true(Point p)
         {
-            return p.X == p.Y;
+            return p.x == p.y;
         }
 
         public static bool operator false(Point p)
         {
-            return p.X == p.Y;
+            return p.x == p.y;
         }
 
         public static Point operator +(Point p, int a)
         {
-            p.X += a;
-            p.Y += a;
+            p.x += a;
+            p.y += a;
             return p;
         }
 
@@ -97,7 +97,7 @@ namespace CSharpLearning.Task15
         {
             if (obj == null || obj is not Point) return false;
             Point p = (Point)obj;
-            return x == p.X && y == p.Y;
+            return x == p.x && y == p.y;
         }
 
         public override int GetHashCode()
