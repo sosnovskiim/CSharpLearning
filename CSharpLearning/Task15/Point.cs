@@ -41,8 +41,8 @@ namespace CSharpLearning.Task15
             y += b;
         }
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { get => x; set => x = value; }
+        public int Y { get => y; set => y = value; }
         public int Multiply { set { x *= value; y *= value; } }
 
         public int this[int i]
@@ -90,6 +90,13 @@ namespace CSharpLearning.Task15
         {
             p.x += a;
             p.y += a;
+            return p;
+        }
+
+        public static Point operator -(Point p, int a)
+        {
+            p.x -= a;
+            p.y -= a;
             return p;
         }
 

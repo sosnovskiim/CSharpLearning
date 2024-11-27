@@ -6,9 +6,7 @@ namespace CSharpLearning.Task15
     internal class Task15
     {
         /*
-         * Решить задачу, разработав собственный класс Point.
-         * Для хранения экземпляров класса использовать типизированную коллекцию List<>.
-         * Продемонстрировать работу класса Point.
+         * Создать класс Point и продемонстрировать его работу.
          */
         internal static void Execute()
         {
@@ -24,37 +22,82 @@ namespace CSharpLearning.Task15
                         points.Add(new Point(int.Parse(coordinates[0]), int.Parse(coordinates[1])));
                     }
 
-                    // Добавление еще нескольких точек
+                    // Конструкторы.
                     points.Add(new Point());
                     points.Add(new Point(3, -3));
                     points.Add(new Point(points[1]));
 
-                    // Проверка работы методов
-                    fileOut.WriteLine(
-                        $"Расстояние от точки {points[4]} до начала координат равно {points[4].DistanceToOrigin()}."
-                    );
-                    fileOut.WriteLine(
-                        $"Расстояние от точки {points[0]} до точки {points[3]} равно {points[0].DistanceToPoint(points[3])}."
-                    );
-                    fileOut.WriteLine($"Точка {points[0]} будет перемещена на вектор {points[1]}.");
-                    points[0].MoveToVector(points[1][0], points[1][1]);
+                    // Метод DistanceToOrigin
+                    Point p1 = points[4];
+                    fileOut.WriteLine($"Расстояние от точки {p1} до начала координат равно {p1.DistanceToOrigin()}.\n");
 
-                    fileOut.WriteLine(
-                        $"Точка {points[1]} {(points[1].Equals(points[3]) ? "" : "не ")}совпадает с точкой {points[3]}."
-                    );
+                    // Метод DistanceToPoint.
+                    p1 = points[0];
+                    Point p2 = points[3];
+                    fileOut.WriteLine($"Расстояние от точки {p1} до точки {p2} равно {p1.DistanceToPoint(p2)}.\n");
 
-                    fileOut.WriteLine(
-                        $"Хэш-коды точек {points[1]} и {points[4]} " +
-                        $"{(points[1].GetHashCode() == points[4].GetHashCode() ? "" : "не ")}идентичны."
-                    );
+                    // Метод MoveToVector и индексаторы.
+                    p1 = points[0];
+                    p2 = points[4];
+                    fileOut.WriteLine($"Точка {p1} будет перемещена на вектор {p2}.");
+                    p1.MoveToVector(p2[0], p2[1]);
+                    fileOut.WriteLine($"Теперь эта точка имеет координаты {p1}.\n");
 
-                    fileOut.WriteLine($"Классом точки {points[0]} является {points[0].GetType()}.");
+                    // Переопределенный метод Equals.
+                    p1 = points[2];
+                    p2 = points[3];
+                    fileOut.WriteLine($"Точка {p1} {(p1.Equals(p2) ? "" : "не ")}совпадает с точкой {p2}.\n");
+
+                    // Переопределенный метод GetHashCode.
+                    p1 = points[1];
+                    p2 = points[4];
+                    fileOut.WriteLine($"Хэш-коды точек {p1} и {p2} {(p1.GetHashCode() == p2.GetHashCode() ? "" : "не ")}идентичны.\n");
+
+                    // Наследованный метод GetType.
+                    p1 = points[3];
+                    fileOut.WriteLine($"Классом точки {p1} является {p1.GetType()}.\n");
+
+                    // Свойства X и Y.
+                    p1 = points[0];
+                    string quarter = "";
+                    if (p1.X > 0 && p1.Y > 0) quarter = " первой";
+                    else if (p1.X < 0 && p1.Y > 0) quarter = "о второй";
+                    else if (p1.X < 0 && p1.Y < 0) quarter = " третьей";
+                    else quarter = " четвертой";
+                    fileOut.WriteLine($"Точка {p1} находится в{quarter} четверти.\n");
+
+                    // Свойство Multiply.
+                    p1 = points[1];
+                    int scalar = -2;
+                    fileOut.WriteLine($"Координаты точки {p1} будут умножены на {scalar}.");
+                    p1.Multiply = scalar;
+                    fileOut.WriteLine($"Теперь эта точка имеет координаты {p1}.\n");
+
+                    // Перегруженные операторы инкремента и декремента.
+                    p1 = points[2];
+                    p2 = points[3];
+                    fileOut.WriteLine($"Точки {p1} и {p2} будут передвинуты на единицу по диагонали.");
+                    p1++; p2--;
+                    fileOut.WriteLine($"Теперь эти точки имеют координаты {p1} и {p2}.\n");
+
+                    // Перегруженные операторы true и false.
+                    p1 = points[0];
+                    p2 = points[2];
+                    fileOut.WriteLine($"Координаты точки {p1} {(p1 ? "" : "не ")}совпадают.");
+                    fileOut.WriteLine($"Координаты точки {p2} {(p2 ? "" : "не ")}совпадают.\n");
+
+                    // Перегруженные операторы суммы и разности.
+                    p1 = points[3];
+                    p2 = points[4];
+                    int a1 = -3;
+                    int a2 = 5;
+                    fileOut.WriteLine($"Точки {p1} и {p2} будут передвинуты на {a1} и {a2} по диагонали соответственно.");
+                    p1 += a1;
+                    p2 += a2;
+                    fileOut.WriteLine($"Теперь эти точки имеют координаты {p1} и {p2}.\n");
 
                     fileOut.WriteLine("Итоговый список точек:");
-                    foreach (Point p in points)
-                    {
-                        fileOut.WriteLine(p);
-                    }
+                    foreach (Point p in points) fileOut.WriteLine(p);
                 }
             }
         }
