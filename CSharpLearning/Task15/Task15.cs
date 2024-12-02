@@ -77,7 +77,8 @@ namespace CSharpLearning.Task15
                     p1 = points[2];
                     p2 = points[3];
                     fileOut.WriteLine($"Точки {p1} и {p2} будут передвинуты на единицу по диагонали.");
-                    p1++; p2--;
+                    p1++;
+                    p2--;
                     fileOut.WriteLine($"Теперь эти точки имеют координаты {p1} и {p2}.\n");
 
                     // Перегруженные операторы true и false.
@@ -92,8 +93,8 @@ namespace CSharpLearning.Task15
                     int a1 = -3;
                     int a2 = 5;
                     fileOut.WriteLine($"Точки {p1} и {p2} будут передвинуты на {a1} и {a2} по диагонали соответственно.");
-                    p1 += a1;
-                    p2 += a2;
+                    p1 = p1 + a1;
+                    p2 = a2 + p2;
                     fileOut.WriteLine($"Теперь эти точки имеют координаты {p1} и {p2}.\n");
 
                     fileOut.WriteLine("Итоговый список точек:");

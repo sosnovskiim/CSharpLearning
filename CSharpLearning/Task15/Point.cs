@@ -62,43 +62,17 @@ namespace CSharpLearning.Task15
             }
         }
 
-        public static Point operator ++(Point p)
-        {
-            p.x++;
-            p.y++;
-            return p;
-        }
+        public static Point operator ++(Point p) => new Point(p.x + 1, p.y + 1);
 
-        public static Point operator --(Point p)
-        {
-            p.x--;
-            p.y--;
-            return p;
-        }
+        public static Point operator --(Point p) => new Point(p.x - 1, p.y - 1);
 
-        public static bool operator true(Point p)
-        {
-            return p.x == p.y;
-        }
+        public static bool operator true(Point p) => p.x == p.y;
 
-        public static bool operator false(Point p)
-        {
-            return p.x == p.y;
-        }
+        public static bool operator false(Point p) => p.x == p.y;
 
-        public static Point operator +(Point p, int a)
-        {
-            p.x += a;
-            p.y += a;
-            return p;
-        }
+        public static Point operator +(Point p, int a) => new Point(p.x + a, p.y + a);
 
-        public static Point operator -(Point p, int a)
-        {
-            p.x -= a;
-            p.y -= a;
-            return p;
-        }
+        public static Point operator +(int a, Point p) => p + a;
 
         public override bool Equals(object obj)
         {
