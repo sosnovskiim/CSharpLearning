@@ -28,6 +28,7 @@ namespace CSharpLearning.Task14
                 var query = from student in students group student by student.GraduatedSchool;
                 foreach (var items in query)
                 {
+                    fileOut.WriteLine(items.Key);
                     foreach (var student in items)
                     {
                         fileOut.WriteLine(student);
@@ -39,6 +40,7 @@ namespace CSharpLearning.Task14
                 var query = students.GroupBy(student => student.GraduatedSchool);
                 foreach (var items in query)
                 {
+                    fileOut.WriteLine(items.Key);
                     foreach (var student in items)
                     {
                         fileOut.WriteLine(student);

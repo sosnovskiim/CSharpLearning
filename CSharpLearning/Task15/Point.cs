@@ -7,11 +7,7 @@ namespace CSharpLearning.Task15
         private int x;
         private int y;
 
-        public Point()
-        {
-            x = 0;
-            y = 0;
-        }
+        public Point() { }
 
         public Point(int x, int y)
         {
@@ -81,14 +77,8 @@ namespace CSharpLearning.Task15
             return x == p.x && y == p.y;
         }
 
-        public override int GetHashCode()
-        {
-            return Tuple.Create(x, y).GetHashCode();
-        }
+        public override int GetHashCode() => Tuple.Create(x, y).GetHashCode();
 
-        public override string ToString()
-        {
-            return $"({x}, {y})";
-        }
+        public override string ToString() => $"({x}, {y})";
     }
 }
