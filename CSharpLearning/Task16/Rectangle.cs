@@ -7,23 +7,6 @@ namespace CSharpLearning.Task16
         private double a;
         private double b;
 
-        public double A
-        {
-            get => a; set
-            {
-                if (a > 0) a = value;
-                else Console.WriteLine("Длина стороны прямоугольника не может быть отрицательной.");
-            }
-        }
-        public double B
-        {
-            get => b; set
-            {
-                if (b > 0) b = value;
-                else Console.WriteLine("Длина стороны прямоугольника не может быть отрицательной.");
-            }
-        }
-
         public Rectangle()
         {
             a = 1;
@@ -32,12 +15,8 @@ namespace CSharpLearning.Task16
 
         public Rectangle(double a, double b)
         {
-            if (a > 0 && b > 0)
-            {
-                this.a = a;
-                this.b = b;
-            }
-            else Console.WriteLine("Длина стороны прямоугольника не может быть отрицательной.");
+            this.a = a;
+            this.b = b;
         }
 
         public Rectangle(Rectangle other)
@@ -59,7 +38,7 @@ namespace CSharpLearning.Task16
 
         public override int GetHashCode() => Tuple.Create(a, b).GetHashCode();
 
-        public override string ToString() => $"Прямоугольник со сторонами {a} и {b}" +
-            $" имеет площадь {Area()} и периметр {Perimeter()}.";
+        public override string ToString() => $"Прямоугольник со сторонами {a} и {b} " +
+            $"имеет площадь {Area()} и периметр {Perimeter()}.";
     }
 }

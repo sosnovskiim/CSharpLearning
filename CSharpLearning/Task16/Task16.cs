@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace CSharpLearning.Task16
 {
@@ -16,16 +18,29 @@ namespace CSharpLearning.Task16
             {
                 using (StreamWriter fileOut = new StreamWriter("../../../Task16/output.txt"))
                 {
-                    int n = int.Parse(fileIn.ReadLine());
-                    Figure[] figures = new Figure[n];
-                    for (int i = 0; i < n; i++)
+                    List<Figure> figures = new List<Figure>();
+                    string line;
+                    while ((line = fileIn.ReadLine()) != null)
                     {
-                        string[] values = fileIn.ReadLine().Split();
-                        if (values.Length == 2)
+                        string[] values = line.Split();
+                        if (values.Length == 1)
                         {
-                            figures[i] = new Rectangle(double.Parse(values[0]), double.Parse(values[1]));
+                            figures.Add(new Circle(double.Parse(values[0])));
+                        }
+                        else if (values.Length == 2)
+                        {
+                            figures.Add(new Rectangle(double.Parse(values[0]), double.Parse(values[1])));
+                        }
+                        else if (values.Length == 3)
+                        {
+                            figures.Add(new Triangle(double.Parse(values[0]), double.Parse(values[1]), double.Parse(values[2])));
+                        }
+                        else
+                        {
+                            Console.WriteLine("Недопустимое количество параметров.");
                         }
                     }
+                    figures.Sort();
                     foreach (Figure f in figures) fileOut.WriteLine(f);
                 }
             }
