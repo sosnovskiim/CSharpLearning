@@ -4,9 +4,53 @@ namespace CSharpLearning.Task16
 {
     internal class Triangle : Figure
     {
-        private double a;
-        private double b;
-        private double c;
+        private const string NonPositiveValue =
+            "Длина стороны треугольника должна быть положительной.";
+        private const string InvalidTriangle =
+            "Длины сторон должны удовлятворять неравенству треугольника.";
+
+        private int a;
+        private int b;
+        private int c;
+
+        public int A
+        {
+            get => a; set
+            {
+                if (value > 0)
+                {
+                    if (isValidTriangle(value, b, c)) a = value;
+                    else throw new InvalidTriangleException(InvalidTriangle);
+                }
+                else throw new NonPositiveValueException(NonPositiveValue);
+            }
+        }
+
+        public int B
+        {
+            get => b; set
+            {
+                if (value > 0)
+                {
+                    if (isValidTriangle(a, value, c)) b = value;
+                    else throw new InvalidTriangleException(InvalidTriangle);
+                }
+                else throw new NonPositiveValueException(NonPositiveValue);
+            }
+        }
+
+        public int C
+        {
+            get => c; set
+            {
+                if (value > 0)
+                {
+                    if (isValidTriangle(a, b, value)) c = value;
+                    else throw new InvalidTriangleException(InvalidTriangle);
+                }
+                else throw new NonPositiveValueException(NonPositiveValue);
+            }
+        }
 
         public Triangle()
         {
@@ -15,11 +59,19 @@ namespace CSharpLearning.Task16
             c = 1;
         }
 
-        public Triangle(double a, double b, double c)
+        public Triangle(int a, int b, int c)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
+            if (a > 0 && b > 0 && c > 0)
+            {
+                if (isValidTriangle(a, b, c))
+                {
+                    this.a = a;
+                    this.b = b;
+                    this.c = c;
+                }
+                else throw new InvalidTriangleException(InvalidTriangle);
+            }
+            else throw new NonPositiveValueException(NonPositiveValue);
         }
 
         public Triangle(Triangle other)
@@ -29,24 +81,31 @@ namespace CSharpLearning.Task16
             c = other.c;
         }
 
-        public override double Area()
+        private bool isValidTriangle(int a, int b, int c) =>
+            (a + b > c) && (b + c > a) && (c + a > b);
+
+        public override double Area
         {
-            double p = Perimeter() / 2;
-            return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+            get
+            {
+                double p = Perimeter / 2;
+                return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+            }
         }
 
-        public override double Perimeter() => a + b + c;
+        public override double Perimeter => a + b + c;
 
         public override bool Equals(object obj)
         {
             if (obj == null || obj is not Triangle) return false;
             Triangle other = (Triangle)obj;
-            return a == other.a && b == other.b && c == other.c;
+            return Area == other.Area;
         }
 
-        public override int GetHashCode() => Tuple.Create(a, b, c).GetHashCode();
+        public override int GetHashCode() => Area.GetHashCode();
 
-        public override string ToString() => $"Треугольник со сторонами {a}, {b} и {c} " +
-            $"имеет площадь {Area()} и периметр {Perimeter()}.";
+        public override string ToString() =>
+            $"Треугольник со сторонами {a}, {b} и {c} " +
+            $"имеет периметр {Math.Round(Perimeter, 2)} и площадь {Math.Round(Area, 2)}.";
     }
 }
