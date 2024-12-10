@@ -84,6 +84,13 @@ namespace CSharpLearning.Task16
         private bool isValidTriangle(int a, int b, int c) =>
             (a + b > c) && (b + c > a) && (c + a > b);
 
+        private Tuple<int, int, int> sortTriangleSides(int a, int b, int c)
+        {
+            int[] sides = new int[3] { a, b, c };
+            Array.Sort(sides);
+            return Tuple.Create(sides[0], sides[1], sides[2]);
+        }
+
         public override double Area
         {
             get
@@ -99,13 +106,19 @@ namespace CSharpLearning.Task16
         {
             if (obj == null || obj is not Triangle) return false;
             Triangle other = (Triangle)obj;
-            return Area == other.Area;
+            Tuple<int, int, int> thisSides = sortTriangleSides(a, b, c);
+            Tuple<int, int, int> otherSides = sortTriangleSides(other.a, other.b, other.c);
+            return thisSides.Equals(otherSides);
         }
 
-        public override int GetHashCode() => Area.GetHashCode();
+        public override int GetHashCode()
+        {
+            Tuple<int, int, int> sides = sortTriangleSides(a, b, c);
+            return (sides.Item1, sides.Item2, sides.Item3).GetHashCode();
+        }
 
         public override string ToString() =>
             $"Треугольник со сторонами {a}, {b} и {c} " +
-            $"имеет периметр {Math.Round(Perimeter, 2)} и площадь {Math.Round(Area, 2)}.";
+            $"имеет периметр {Perimeter} и площадь {Math.Round(Area, 2)}.";
     }
 }

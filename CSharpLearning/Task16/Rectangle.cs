@@ -56,10 +56,10 @@
         {
             if (obj == null || obj is not Rectangle) return false;
             Rectangle other = (Rectangle)obj;
-            return Area == other.Area;
+            return a == other.a && b == other.b || a == other.b && b == other.a;
         }
 
-        public override int GetHashCode() => Area.GetHashCode();
+        public override int GetHashCode() => (a ^ b).GetHashCode();
 
         public override string ToString() =>
             $"Прямоугольник со сторонами {a} и {b} " +
