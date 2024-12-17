@@ -19,26 +19,33 @@ namespace CSharpLearning.Task16
                 using (StreamWriter fileOut = new StreamWriter("../../../Task16/output.txt"))
                 {
                     List<Figure> figures = new List<Figure>();
-                    string line;
-                    while ((line = fileIn.ReadLine()) != null)
+                    char[] separators = { '\r', '\t', '\n', ',', '.', ';', ':', '!', '?', '—', '–', '\'', '\"' };
+                    string[] elements = fileIn.ReadToEnd().Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string element in elements)
                     {
-                        string[] values = line.Split();
-                        if (values.Length == 1)
+                        string[] values = element.Split();
+                        if (values[0] == "C")
                         {
-                            figures.Add(new Circle(int.Parse(values[0])));
+                            if (values.Length == 2)
+                                figures.Add(new Circle(int.Parse(values[1])));
+                            else
+                                Console.WriteLine("Недопустимое количество аргументов для круга.");
                         }
-                        else if (values.Length == 2)
+                        else if (values[0] == "R")
                         {
-                            figures.Add(new Rectangle(int.Parse(values[0]), int.Parse(values[1])));
+                            if (values.Length == 3)
+                                figures.Add(new Rectangle(int.Parse(values[1]), int.Parse(values[2])));
+                            else
+                                Console.WriteLine("Недопустимое количество аргументов для прямоугольника.");
                         }
-                        else if (values.Length == 3)
+                        else if (values[0] == "T")
                         {
-                            figures.Add(new Triangle(int.Parse(values[0]), int.Parse(values[1]), int.Parse(values[2])));
+                            if (values.Length == 4)
+                                figures.Add(new Triangle(int.Parse(values[1]), int.Parse(values[2]), int.Parse(values[3])));
+                            else
+                                Console.WriteLine("Недопустимое количество аргументов для треугольника.");
                         }
-                        else
-                        {
-                            Console.WriteLine("Недопустимое количество аргументов.");
-                        }
+                        else Console.WriteLine("Недопустимый тип фигуры.");
                     }
                     figures.Sort();
                     foreach (Figure f in figures) fileOut.WriteLine(f);
