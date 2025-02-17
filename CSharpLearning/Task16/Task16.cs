@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CSharpLearning.Task16
 {
@@ -14,43 +15,48 @@ namespace CSharpLearning.Task16
          */
         internal static void Execute()
         {
-            using (StreamReader fileIn = new StreamReader("../../../Task16/input.txt"))
+            const string filePath = "../../../Task16/figures.dat";
+            List<Figure> figures;
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream streamIn = new FileStream(filePath, FileMode.OpenOrCreate))
             {
-                using (StreamWriter fileOut = new StreamWriter("../../../Task16/output.txt"))
+                if (streamIn.Length > 0)
                 {
-                    List<Figure> figures = new List<Figure>();
-                    char[] separators = { '\r', '\t', '\n', ',', '.', ';', ':', '!', '?', '—', '–', '\'', '\"' };
-                    string[] elements = fileIn.ReadToEnd().Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string element in elements)
-                    {
-                        string[] values = element.Split();
-                        if (values[0] == "C")
-                        {
-                            if (values.Length == 2)
-                                figures.Add(new Circle(int.Parse(values[1])));
-                            else
-                                Console.WriteLine("Недопустимое количество аргументов для круга.");
-                        }
-                        else if (values[0] == "R")
-                        {
-                            if (values.Length == 3)
-                                figures.Add(new Rectangle(int.Parse(values[1]), int.Parse(values[2])));
-                            else
-                                Console.WriteLine("Недопустимое количество аргументов для прямоугольника.");
-                        }
-                        else if (values[0] == "T")
-                        {
-                            if (values.Length == 4)
-                                figures.Add(new Triangle(int.Parse(values[1]), int.Parse(values[2]), int.Parse(values[3])));
-                            else
-                                Console.WriteLine("Недопустимое количество аргументов для треугольника.");
-                        }
-                        else Console.WriteLine("Недопустимый тип фигуры.");
-                    }
-                    figures.Sort();
-                    foreach (Figure f in figures) fileOut.WriteLine(f);
+                    figures = (List<Figure>)formatter.Deserialize(streamIn);
+                    foreach (Figure figure in figures) Console.WriteLine(figure);
+                }
+                else
+                {
+                    figures = new List<Figure>();
+                    Console.WriteLine("Список фигур пуст.");
                 }
             }
+            Console.WriteLine();
+
+            if (figures.Count == 0)
+            {
+                figures.Add(new Circle(3));
+                figures.Add(new Rectangle(1, 2));
+                figures.Add(new Rectangle(3, 4));
+                figures.Add(new Triangle(6, 2, 7));
+                figures.Add(new Triangle(3, 4, 2));
+            }
+            else
+            {
+                figures.Add(new Circle(1));
+                figures.Add(new Triangle(2, 3, 4));
+                figures.Add(new Rectangle(9, 5));
+            }
+
+            figures.Sort();
+            foreach (Figure figure in figures) Console.WriteLine(figure);
+            Console.WriteLine();
+
+            using (FileStream streamOut = new FileStream(filePath, FileMode.Open))
+            {
+                formatter.Serialize(streamOut, figures);
+            }
+            Console.WriteLine("Список фигур сериализован.");
         }
     }
 }

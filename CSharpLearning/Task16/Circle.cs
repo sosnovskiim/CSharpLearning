@@ -2,6 +2,7 @@
 
 namespace CSharpLearning.Task16
 {
+    [Serializable]
     internal class Circle : Figure
     {
         private const string NonPositiveValue =

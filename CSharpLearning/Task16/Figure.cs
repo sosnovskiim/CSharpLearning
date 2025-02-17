@@ -2,6 +2,7 @@
 
 namespace CSharpLearning.Task16
 {
+    [Serializable]
     internal abstract class Figure : IComparable<Figure>
     {
         public int CompareTo(Figure other)

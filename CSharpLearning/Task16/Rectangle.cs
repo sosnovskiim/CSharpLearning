@@ -1,5 +1,8 @@
-﻿namespace CSharpLearning.Task16
+﻿using System;
+
+namespace CSharpLearning.Task16
 {
+    [Serializable]
     internal class Rectangle : Figure
     {
         private const string NonPositiveValue =
