@@ -77,7 +77,7 @@ namespace CSharpLearning.Task17
 
         public bool IsEmpty { get { return head == null; } }
 
-        public IntNode Find(int keyNumber)
+        private IntNode Find(int keyNumber)
         {
             if (head == null) throw new EmptyIntListException(EmptyIntList);
             IntNode r = head;

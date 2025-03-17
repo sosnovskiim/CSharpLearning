@@ -31,7 +31,7 @@ namespace CSharpLearning.Task16
 
         public override double Area => Math.PI * r * r;
 
-        public override double Perimeter => 2 * Math.PI * r * r;
+        public override double Perimeter => 2 * Math.PI * r;
 
         public override bool Equals(object obj)
         {
