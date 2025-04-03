@@ -5,8 +5,8 @@ namespace CSharpLearning.Task18
     internal class Task18
     {
         /*
-         * По входной последовательности целых чисел построить дерево бинарного поиска
-         * и найти для него сумму нечетных значений узлов дерева;
+         * 1. РџРѕ РІС…РѕРґРЅРѕР№ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё С†РµР»С‹С… С‡РёСЃРµР» РїРѕСЃС‚СЂРѕРёС‚СЊ РґРµСЂРµРІРѕ Р±РёРЅР°СЂРЅРѕРіРѕ РїРѕРёСЃРєР°
+         * Рё РЅР°Р№С‚Рё РґРЅСЏ РЅРµРіРѕ СЃСѓРјРјСѓ РЅРµС‡С‘С‚РЅС‹С… Р·РЅР°С‡РµРЅРёР№ СѓР·Р»РѕРІ РґРµСЂРµРІР°.
          */
         internal static void Execute()
         {
@@ -18,7 +18,8 @@ namespace CSharpLearning.Task18
                     IntTree intTree = new IntTree();
                     foreach (string item in data) intTree.Add(int.Parse(item));
                     intTree.DirectTraverse();
-                    fileOut.WriteLine(intTree.SumOdd());
+                    // 1. fileOut.WriteLine(intTree.SumOdd());
+                    fileOut.WriteLine(intTree.GetNodeDepth(12));
                 }
             }
         }

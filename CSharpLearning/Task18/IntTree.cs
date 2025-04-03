@@ -91,6 +91,20 @@ namespace CSharpLearning.Task18
                 if (r.left != null) SumOdd(r.left, ref sum);
                 if (r.right != null) SumOdd(r.right, ref sum);
             }
+
+            public static void GetDepth(IntNode r, int keyNumber, ref int depth, ref bool isExists)
+            {
+                if (r != null)
+                {
+                    if (r.number != keyNumber)
+                    {
+                        depth++;
+                        if (r.number > keyNumber) GetDepth(r.left, keyNumber, ref depth, ref isExists);
+                        else GetDepth(r.right, keyNumber, ref depth, ref isExists);
+                    }
+                    else isExists = true;
+                }
+            }
         }
 
         private IntNode root;
@@ -128,6 +142,15 @@ namespace CSharpLearning.Task18
             int sum = 0;
             if (root != null) IntNode.SumOdd(root, ref sum);
             return sum;
+        }
+
+        public int GetNodeDepth(int keyNumber)
+        {
+            int depth = 0;
+            bool isExists = false;
+            IntNode.GetDepth(root, keyNumber, ref depth, ref isExists);
+            if (isExists) return depth;
+            return -1;
         }
     }
 }
