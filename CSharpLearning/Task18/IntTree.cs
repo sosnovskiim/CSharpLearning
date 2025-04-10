@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace CSharpLearning.Task18
@@ -164,20 +163,6 @@ namespace CSharpLearning.Task18
             {
                 if (r != null)
                 {
-                    /*
-                    if (r.BalanceFactor > 1) DeleteUnbalancedNode(r.right, ref result);
-                    else if (r.BalanceFactor < -1) DeleteUnbalancedNode(r.left, ref result);
-                    else if (r.right != null)
-                    {
-                        result = new IntNode(r.right.number);
-                        r.right = null;
-                    }
-                    else if (r.left != null)
-                    {
-                        result = new IntNode(r.left.number);
-                        r.left = null;
-                    }
-                    */
                     if (r.BalanceFactor > 0)
                     {
                         DeleteUnbalancedNode(ref r.right, ref result);
@@ -195,58 +180,6 @@ namespace CSharpLearning.Task18
                     }
                 }
             }
-
-            /*
-            public static void MakePerfectlyBalanced(IntNode r, int n, ref List<int> nodesToDelete, ref bool isNotPossible)
-            {
-                if (r != null)
-                {
-                    if ((r.right != null ? r.right.count : 0) - (r.left != null ? r.left.count : 0) > 1)
-                    {
-                        DeleteUnbalancedNode(r.right, n, ref nodesToDelete, ref isNotPossible);
-                    }
-                    else if ((r.left != null ? r.left.count : 0) - (r.right != null ? r.right.count : 0) > 1)
-                    {
-                        DeleteUnbalancedNode(r.left, n, ref nodesToDelete, ref isNotPossible);
-                    }
-                    else
-                    {
-                        MakePerfectlyBalanced(r.left, n, ref nodesToDelete, ref isNotPossible);
-                        MakePerfectlyBalanced(r.right, n, ref nodesToDelete, ref isNotPossible);
-                    }
-                }
-            }
-
-            public static void DeleteUnbalancedNode(IntNode r, int n, ref List<int> nodesToDelete, ref bool isNotPossible)
-            {
-                if (r != null)
-                {
-                    if ((r.right != null ? r.right.count : 0) - (r.left != null ? r.left.count : 0) > 1)
-                    {
-                        DeleteUnbalancedNode(r.right, n, ref nodesToDelete, ref isNotPossible);
-                    }
-                    else if ((r.left != null ? r.left.count : 0) - (r.right != null ? r.right.count : 0) > 1)
-                    {
-                        DeleteUnbalancedNode(r.left, n, ref nodesToDelete, ref isNotPossible);
-                    }
-                    else
-                    {
-                        if (r.right != null)
-                        {
-                            Delete(ref r, r.right.number);
-                            if (nodesToDelete.Count < n) nodesToDelete.Add(r.right.number);
-                            else isNotPossible = true;
-                        }
-                        else if (r.left != null)
-                        {
-                            Delete(ref r, r.left.number);
-                            if (nodesToDelete.Count < n) nodesToDelete.Add(r.left.number);
-                            else isNotPossible = true;
-                        }
-                    }
-                }
-            }
-            */
         }
 
         private IntNode root;
@@ -302,7 +235,6 @@ namespace CSharpLearning.Task18
             List<IntNode> nodesToDelete = new List<IntNode>();
             for (int i = 0; i < n + 1; i++)
             {
-                DirectTraverseWithCount();
                 IntNode result = null;
                 IntNode.MakePerfectlyBalanced(root, ref result);
                 if (result != null) nodesToDelete.Add(result);
@@ -322,27 +254,5 @@ namespace CSharpLearning.Task18
             return "Чтобы дерево стало идеально сбалансированным, " +
                 $"можно удалить следующие узлы: {builder}";
         }
-
-        /*
-        public string MakePerfectlyBalanced(int n)
-        {
-            List<int> nodesToDelete = new List<int>();
-            bool isNotPossible = false;
-            IntNode.MakePerfectlyBalanced(root, n, ref nodesToDelete, ref isNotPossible);
-            if (isNotPossible)
-                return $"Нельзя удалить не более {n} узлов так, " +
-                    "чтобы дерево стало идеально сбалансированным.";
-            if (nodesToDelete.Count == 0)
-                return "Дерево уже идеально сбалансированно.";
-            StringBuilder builder = new StringBuilder();
-            foreach (int number in nodesToDelete)
-            {
-                builder.Append(number);
-                builder.Append(' ');
-            }
-            return "Чтобы дерево стало идеально сбалансированным, " +
-                $"можно удалить следующие {nodesToDelete.Count} узлов: {builder}.";
-        }
-        */
     }
 }
