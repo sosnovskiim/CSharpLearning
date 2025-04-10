@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace CSharpLearning.Task18
 {
@@ -7,14 +10,35 @@ namespace CSharpLearning.Task18
         private class IntNode
         {
             public int number;
+            public int count;
             public IntNode left;
             public IntNode right;
 
             public IntNode(int number)
             {
                 this.number = number;
+                count = 1;
                 left = null;
                 right = null;
+            }
+
+            public int Count { get { return (this != null) ? this.count : 0; } }
+
+            public int BalanceFactor
+            {
+                get
+                {
+                    int count_right = (right != null) ? right.count : 0;
+                    int count_left = (left != null) ? left.count : 0;
+                    return count_right - count_left;
+                }
+            }
+
+            public void UpdateCount()
+            {
+                int count_right = (right != null) ? right.count : 0;
+                int count_left = (left != null) ? left.count : 0;
+                count = count_right + count_left + 1;
             }
 
             public static void Add(ref IntNode r, int number)
@@ -25,6 +49,7 @@ namespace CSharpLearning.Task18
                     if (r.number > number) Add(ref r.left, number);
                     else Add(ref r.right, number);
                 }
+                r.UpdateCount();
             }
 
             public static void DirectTraverse(IntNode r)
@@ -57,6 +82,16 @@ namespace CSharpLearning.Task18
                 }
             }
 
+            public static void DirectTraverseWithCount(IntNode r)
+            {
+                if (r != null)
+                {
+                    Console.WriteLine($"{r.number} {r.count}");
+                    DirectTraverseWithCount(r.left);
+                    DirectTraverseWithCount(r.right);
+                }
+            }
+
             public static void Find(IntNode r, int keyNumber, out IntNode item)
             {
                 if (r == null) item = null;
@@ -78,11 +113,15 @@ namespace CSharpLearning.Task18
             public static void Delete(ref IntNode t, int keyNumber)
             {
                 if (t == null) throw new Exception("В дереве отсутствует ключевое значение.");
-                else if (t.number > keyNumber) Delete(ref t.left, keyNumber);
-                else if (t.number < keyNumber) Delete(ref t.right, keyNumber);
-                else if (t.left == null) t = t.right;
-                else if (t.right == null) t = t.left;
-                else Del(t, ref t.left);
+                else
+                {
+                    if (t.number > keyNumber) Delete(ref t.left, keyNumber);
+                    else if (t.number < keyNumber) Delete(ref t.right, keyNumber);
+                    else if (t.left == null) t = t.right;
+                    else if (t.right == null) t = t.left;
+                    else Del(t, ref t.left);
+                    t.UpdateCount();
+                }
             }
 
             public static void SumOdd(IntNode r, ref int sum)
@@ -105,6 +144,109 @@ namespace CSharpLearning.Task18
                     else isExists = true;
                 }
             }
+
+            public static void MakePerfectlyBalanced(IntNode r, ref IntNode result)
+            {
+                if (r != null)
+                {
+                    if (r.BalanceFactor > 1) DeleteUnbalancedNode(ref r.right, ref result);
+                    else if (r.BalanceFactor < -1) DeleteUnbalancedNode(ref r.left, ref result);
+                    else
+                    {
+                        MakePerfectlyBalanced(r.left, ref result);
+                        MakePerfectlyBalanced(r.right, ref result);
+                    }
+                    r.UpdateCount();
+                }
+            }
+
+            public static void DeleteUnbalancedNode(ref IntNode r, ref IntNode result)
+            {
+                if (r != null)
+                {
+                    /*
+                    if (r.BalanceFactor > 1) DeleteUnbalancedNode(r.right, ref result);
+                    else if (r.BalanceFactor < -1) DeleteUnbalancedNode(r.left, ref result);
+                    else if (r.right != null)
+                    {
+                        result = new IntNode(r.right.number);
+                        r.right = null;
+                    }
+                    else if (r.left != null)
+                    {
+                        result = new IntNode(r.left.number);
+                        r.left = null;
+                    }
+                    */
+                    if (r.BalanceFactor > 0)
+                    {
+                        DeleteUnbalancedNode(ref r.right, ref result);
+                        r.UpdateCount();
+                    }
+                    else if (r.left != null)
+                    {
+                        DeleteUnbalancedNode(ref r.left, ref result);
+                        r.UpdateCount();
+                    }
+                    else
+                    {
+                        result = new IntNode(r.number);
+                        r = null;
+                    }
+                }
+            }
+
+            /*
+            public static void MakePerfectlyBalanced(IntNode r, int n, ref List<int> nodesToDelete, ref bool isNotPossible)
+            {
+                if (r != null)
+                {
+                    if ((r.right != null ? r.right.count : 0) - (r.left != null ? r.left.count : 0) > 1)
+                    {
+                        DeleteUnbalancedNode(r.right, n, ref nodesToDelete, ref isNotPossible);
+                    }
+                    else if ((r.left != null ? r.left.count : 0) - (r.right != null ? r.right.count : 0) > 1)
+                    {
+                        DeleteUnbalancedNode(r.left, n, ref nodesToDelete, ref isNotPossible);
+                    }
+                    else
+                    {
+                        MakePerfectlyBalanced(r.left, n, ref nodesToDelete, ref isNotPossible);
+                        MakePerfectlyBalanced(r.right, n, ref nodesToDelete, ref isNotPossible);
+                    }
+                }
+            }
+
+            public static void DeleteUnbalancedNode(IntNode r, int n, ref List<int> nodesToDelete, ref bool isNotPossible)
+            {
+                if (r != null)
+                {
+                    if ((r.right != null ? r.right.count : 0) - (r.left != null ? r.left.count : 0) > 1)
+                    {
+                        DeleteUnbalancedNode(r.right, n, ref nodesToDelete, ref isNotPossible);
+                    }
+                    else if ((r.left != null ? r.left.count : 0) - (r.right != null ? r.right.count : 0) > 1)
+                    {
+                        DeleteUnbalancedNode(r.left, n, ref nodesToDelete, ref isNotPossible);
+                    }
+                    else
+                    {
+                        if (r.right != null)
+                        {
+                            Delete(ref r, r.right.number);
+                            if (nodesToDelete.Count < n) nodesToDelete.Add(r.right.number);
+                            else isNotPossible = true;
+                        }
+                        else if (r.left != null)
+                        {
+                            Delete(ref r, r.left.number);
+                            if (nodesToDelete.Count < n) nodesToDelete.Add(r.left.number);
+                            else isNotPossible = true;
+                        }
+                    }
+                }
+            }
+            */
         }
 
         private IntNode root;
@@ -126,6 +268,8 @@ namespace CSharpLearning.Task18
         public void SymmetricTraverse() { IntNode.SymmetricTraverse(root); }
 
         public void ReverseTraverse() { IntNode.ReverseTraverse(root); }
+
+        public void DirectTraverseWithCount() { IntNode.DirectTraverseWithCount(root); }
 
         public IntTree Find(int keyNumber)
         {
@@ -152,5 +296,53 @@ namespace CSharpLearning.Task18
             if (isExists) return depth;
             return -1;
         }
+
+        public string MakePerfectlyBalanced(int n)
+        {
+            List<IntNode> nodesToDelete = new List<IntNode>();
+            for (int i = 0; i < n + 1; i++)
+            {
+                DirectTraverseWithCount();
+                IntNode result = null;
+                IntNode.MakePerfectlyBalanced(root, ref result);
+                if (result != null) nodesToDelete.Add(result);
+                else break;
+            }
+            if (nodesToDelete.Count > n)
+                return $"Нельзя удалить не более {n} узлов так, " +
+                    "чтобы дерево стало идеально сбалансированным";
+            if (nodesToDelete.Count == 0)
+                return "Дерево уже идеально сбалансированно";
+            StringBuilder builder = new StringBuilder();
+            foreach (IntNode node in nodesToDelete)
+            {
+                builder.Append(node.number);
+                builder.Append(' ');
+            }
+            return "Чтобы дерево стало идеально сбалансированным, " +
+                $"можно удалить следующие узлы: {builder}";
+        }
+
+        /*
+        public string MakePerfectlyBalanced(int n)
+        {
+            List<int> nodesToDelete = new List<int>();
+            bool isNotPossible = false;
+            IntNode.MakePerfectlyBalanced(root, n, ref nodesToDelete, ref isNotPossible);
+            if (isNotPossible)
+                return $"Нельзя удалить не более {n} узлов так, " +
+                    "чтобы дерево стало идеально сбалансированным.";
+            if (nodesToDelete.Count == 0)
+                return "Дерево уже идеально сбалансированно.";
+            StringBuilder builder = new StringBuilder();
+            foreach (int number in nodesToDelete)
+            {
+                builder.Append(number);
+                builder.Append(' ');
+            }
+            return "Чтобы дерево стало идеально сбалансированным, " +
+                $"можно удалить следующие {nodesToDelete.Count} узлов: {builder}.";
+        }
+        */
     }
 }
