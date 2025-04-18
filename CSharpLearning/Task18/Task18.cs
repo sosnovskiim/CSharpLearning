@@ -23,7 +23,7 @@ namespace CSharpLearning.Task18
                     foreach (string item in data) intTree.Add(int.Parse(item));
                     // 1. fileOut.WriteLine(intTree.SumOdd());
                     // 2. fileOut.WriteLine(intTree.GetNodeDepth(12));
-                    fileOut.WriteLine(intTree.MakePerfectlyBalanced(1));
+                    fileOut.WriteLine(intTree.MakePerfectlyBalanced(2));
                 }
             }
         }
