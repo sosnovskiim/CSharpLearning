@@ -7,6 +7,8 @@ namespace Entities
     {
         public int id;
 
+        public int Id { get; set; }
+
         public int CompareTo(Figure other)
         {
             if (Area > other.Area) return 1;

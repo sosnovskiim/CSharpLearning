@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using Entities;
 
 namespace Data
@@ -8,7 +8,7 @@ namespace Data
         void AddFigure(Figure figure);
         void RemoveFigureById(int id);
         Figure GetFigureById(int id);
-        IEnumerable GetAllFigures();
+        List<Figure> GetAllFigures();
         void SaveAllFigures();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Entities;
 
@@ -8,7 +9,7 @@ namespace Data
 {
     public class FiguresRepository : IFiguresRepository
     {
-        const string filePath = "../../../Task19/figures.dat";
+        const string filePath = "../../../figures.dat";
         BinaryFormatter formatter = new BinaryFormatter();
         Dictionary<int, Figure> figures;
         int figureId;
@@ -34,15 +35,18 @@ namespace Data
         public void AddFigure(Figure figure)
         {
             figureId++;
-            figure.id = figureId;
+            figure.Id = figureId;
             figures.Add(figureId, figure);
         }
 
         public void RemoveFigureById(int id) => figures.Remove(id);
 
-        public Figure GetFigureById(int id) => figures[id];
+        public Figure GetFigureById(int id)
+        {
+            try { return figures[id]; } catch { return null; }
+        }
 
-        public IEnumerable GetAllFigures() => figures.Values;
+        public List<Figure> GetAllFigures() => figures.Values.ToList();
 
         public void SaveAllFigures()
         {

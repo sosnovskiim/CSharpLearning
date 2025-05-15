@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using Entities;
 
 namespace Logic
@@ -10,7 +10,10 @@ namespace Logic
         void AddTriangle(int a, int b, int c);
         void RemoveFigureById(int id);
         Figure GetFigureById(int id);
-        IEnumerable GetAllFigures();
+        List<Figure> GetAllFigures();
+        List<Circle> GetAllCircles();
+        List<Rectangle> GetAllRectangles();
+        List<Triangle> GetAllTriangles();
         void SaveAllFigures();
     }
 }

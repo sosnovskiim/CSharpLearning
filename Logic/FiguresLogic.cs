@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using Data;
 using Entities;
 
@@ -32,7 +32,37 @@ namespace Logic
 
         public Figure GetFigureById(int id) => figuresRepository.GetFigureById(id);
 
-        public IEnumerable GetAllFigures() => figuresRepository.GetAllFigures();
+        public List<Figure> GetAllFigures() => figuresRepository.GetAllFigures();
+
+        public List<Circle> GetAllCircles()
+        {
+            List<Circle> circles = new List<Circle>();
+            foreach (Figure figure in figuresRepository.GetAllFigures())
+            {
+                if (figure is Circle) circles.Add((Circle)figure);
+            }
+            return circles;
+        }
+
+        public List<Rectangle> GetAllRectangles()
+        {
+            List<Rectangle> rectangles = new List<Rectangle>();
+            foreach (Figure figure in figuresRepository.GetAllFigures())
+            {
+                if (figure is Rectangle) rectangles.Add((Rectangle)figure);
+            }
+            return rectangles;
+        }
+
+        public List<Triangle> GetAllTriangles()
+        {
+            List<Triangle> triangles = new List<Triangle>();
+            foreach (Figure figure in figuresRepository.GetAllFigures())
+            {
+                if (figure is Triangle) triangles.Add((Triangle)figure);
+            }
+            return triangles;
+        }
 
         public void SaveAllFigures() => figuresRepository.SaveAllFigures();
     }

@@ -10,12 +10,12 @@ namespace Utils
 
         public static IFiguresRepository FiguresRepository
         {
-            get => figuresRepository ?? (figuresRepository = new FiguresRepository());
+            get => figuresRepository ??= new FiguresRepository();
         }
 
         public static IFiguresLogic FiguresLogic
         {
-            get => figuresLogic ?? (figuresLogic = new FiguresLogic(FiguresRepository));
+            get => figuresLogic ??= new FiguresLogic(FiguresRepository);
         }
     }
 }
