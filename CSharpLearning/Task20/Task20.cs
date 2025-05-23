@@ -3,6 +3,11 @@ using System.IO;
 
 namespace CSharpLearning.Task20
 {
+    /*
+     * Во входном файле указывается количество вершин графа и матрица смежности.
+     *  1. Посчитать количество вершин, смежных с данной;
+     *  2. Найти все вершины графа, достижимые из данной.
+     */
     internal class Task20
     {
         internal static void Execute()

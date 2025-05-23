@@ -36,7 +36,10 @@ namespace CSharpLearning.Task20
                 nov[v] = false;
                 for (int u = 0; u < Size; u++)
                 {
-                    if (matrix[v, u] != 0 && nov[u]) DepthFirstSearch(u);
+                    if (matrix[v, u] != 0 && nov[u])
+                    {
+                        DepthFirstSearch(u);
+                    }
                 }
             }
 
@@ -45,7 +48,7 @@ namespace CSharpLearning.Task20
                 Queue<int> q = new Queue<int>();
                 q.Enqueue(v);
                 nov[v] = false;
-                while (q.Count != 0)
+                while (q.Count > 0)
                 {
                     v = q.Dequeue();
                     Console.Write($"{v} ");
@@ -121,7 +124,7 @@ namespace CSharpLearning.Task20
             int count = 0;
             for (int j = 0; j < graph.Size; j++)
             {
-                if (graph[v, j] == 1) count++;
+                if (graph[v, j] != 0) count++;
             }
             return count;
         }

@@ -5,6 +5,10 @@ using Utils;
 
 namespace CSharpLearning.Task19
 {
+    /*
+     * Трёхуровневая архитектура, позволяющая добавлять, удалять, сортировать,
+     * сохранять и загружать из файла список фигур: кругов, прямоугольников, треугольников.
+     */
     internal class Task19
     {
         internal static void Execute()
